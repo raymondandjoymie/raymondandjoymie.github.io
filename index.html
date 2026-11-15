@@ -315,6 +315,12 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
 .host p{font-size:15px;color:var(--muted);margin:4px 0;max-width:none}
 
 
+.attire-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-width:340px;margin:4px auto 14px;padding:4px;background:#fbe9df;border-radius:999px}
+.attire-tabs button{border:0;background:transparent;border-radius:999px;padding:10px 6px;font:600 11px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+.attire-tabs button[aria-selected="true"]{background:var(--blue-d);color:#fff;box-shadow:0 4px 10px rgba(233,30,99,.25)}
+.attire-pane[hidden]{display:none}
+.attire-img{width:100%;height:auto;border-radius:6px;box-shadow:0 6px 18px rgba(110,40,60,.14);margin:0 0 14px}
+.dots.three{grid-template-columns:repeat(3,minmax(0,1fr));max-width:200px}
 /* gallery */
 .gal{columns:2;column-gap:8px;margin:14px 0 6px}
 .gal button{display:block;width:100%;margin:0 0 8px;padding:0;border:0;background:#fbe8ee;cursor:zoom-in;break-inside:avoid;border-radius:3px;overflow:hidden;box-shadow:0 3px 10px rgba(110,40,60,.12)}
@@ -514,9 +520,18 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
       <img class="orn" alt="">
       <h2 class="t" id="dc-h">Dress Code</h2>
       <p class="sub">(Attire &amp; Colors)</p>
-      <div class="figs" id="figs" aria-hidden="true"></div>
-      <p class="small">Guests are encouraged to wear elegant formal or semi-formal outfits in our wedding colours: <b>Pink, Fuchsia, Orange, Yellow and a touch of Green.</b></p>
-      <div class="dots" id="dots"></div>
+      <div class="attire-tabs" role="tablist" aria-label="Attire guide">
+        <button type="button" role="tab" id="tab-guests" aria-selected="true" aria-controls="pane-guests">Wedding Guests</button>
+        <button type="button" role="tab" id="tab-sponsors" aria-selected="false" aria-controls="pane-sponsors">Principal Sponsors</button>
+      </div>
+      <div class="attire-pane" role="tabpanel" id="pane-guests" aria-labelledby="tab-guests">
+        <img class="attire-img" src="photos/attire-guests.jpg" width="1000" height="1050" loading="lazy" alt="Attire guide for wedding guests: ladies in pink, orange or yellow dresses; gentlemen in pink, orange or yellow collared shirts with beige or dark slacks">
+        <p class="small"><b>Ladies:</b> dresses in pink, orange or yellow.<br><b>Gentlemen:</b> collared shirts in pink, orange or yellow with beige or dark slacks.</p>
+      </div>
+      <div class="attire-pane" role="tabpanel" id="pane-sponsors" aria-labelledby="tab-sponsors" hidden>
+        <img class="attire-img" src="photos/attire-sponsors.jpg" width="1000" height="1050" loading="lazy" alt="Attire guide for principal sponsors: ladies in long gowns in champagne, dusty rose and nude tones; gentlemen in barong with dark trousers">
+        <p class="small"><b>Ladies:</b> long gowns in champagne, dusty rose or nude tones.<br><b>Gentlemen:</b> barong Tagalog with dark trousers.</p>
+      </div>
     </section>
 
     <section aria-labelledby="gift-h">
@@ -1250,13 +1265,11 @@ function addButterflies(host, spots){
 addButterflies($('#gate'), [['14%', '18%', 1, 0], ['78%', '30%', .8, 2, '#FF7F00'], ['70%', '76%', .9, 4]]);
 addButterflies($('.collage'), [['86%', '4%', .9, 1], ['44%', '40%', .7, 3, '#FF7F00'], ['6%', '72%', .8, 5], ['82%', '62%', .75, 2.5, '#FF7F00']]);
 
-// dress-code figures: gowns and suits in the palette
-(function figures(){
-  const gown = c => `<svg viewBox="0 0 60 120"><circle cx="30" cy="12" r="7" fill="#e9d6c4"/><path d="M26 18h8l1 5-1 3 2 8c-1 6-3 10-3 12l14 64H12l14-64c0-2-2-6-3-12l2-8-1-3z" fill="${c}"/><path d="M23 34h14" stroke="#fff" stroke-opacity=".35"/><path d="M30 46 L24 112 M30 46 L36 112" stroke="#000" stroke-opacity=".08"/></svg>`;
-  const suit = c => `<svg viewBox="0 0 60 120"><circle cx="30" cy="12" r="7" fill="#d9b99c"/><path d="M19 22h22l4 40h-4l-1 54h-8l-2-44-2 44h-8l-1-54h-4z" fill="${c}"/><path d="M27 22l3 14 3-14" fill="#fff"/><path d="M30 36v22" stroke="#000" stroke-opacity=".15"/></svg>`;
-  $('#figs').innerHTML = [gown('#E91E63'), suit('#8CAA6B'), gown('#FFA766'), suit('#e9d6b0'), gown('#F48FB1')].join('');
-  const dots = [['#F48FB1', 'Pink'], ['#E91E63', 'Fuchsia'], ['#FFA766', 'Orange'], ['#FFD600', 'Yellow'], ['#8CAA6B', 'Green']];
-  $('#dots').innerHTML = dots.map(([c, n]) => `<span><i style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),rgba(255,255,255,0) 55%),${c}"></i>${n}</span>`).join('');
+// attire guide tabs
+(function attireTabs(){
+  const tabs = [...document.querySelectorAll('.attire-tabs [role=tab]')];
+  const pick = t => tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; $('#' + x.getAttribute('aria-controls')).hidden = !on; });
+  tabs.forEach((t, i) => { t.addEventListener('click', () => pick(t)); t.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; pick(n); n.focus(); } }); });
 })();
 
 /* ---------- centre script letters by their actual ink, not their font box ---------- */
