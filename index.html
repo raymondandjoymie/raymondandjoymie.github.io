@@ -305,8 +305,14 @@ form.declining .if-yes{display:none}
 
 /* gallery */
 .gal{columns:2;column-gap:8px;margin:14px 0 6px}
-.gal button{display:block;width:100%;margin:0 0 8px;padding:0;border:0;background:#e9eff6;cursor:zoom-in;break-inside:avoid;border-radius:3px;overflow:hidden;box-shadow:0 3px 10px rgba(110,40,60,.12)}
+.gal button{display:block;width:100%;margin:0 0 8px;padding:0;border:0;background:#fbe8ee;cursor:zoom-in;break-inside:avoid;border-radius:3px;overflow:hidden;box-shadow:0 3px 10px rgba(110,40,60,.12)}
 .gal img{width:100%;height:auto;display:block;transition:transform .5s ease}
+/* balanced two-column layout (set up by script): both columns end on the same line */
+.gal.cols{columns:auto;display:flex;gap:8px;align-items:stretch}
+.gal.cols .gcol{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.gal.cols button{margin:0}
+.gal.cols .gcol > button:last-child{flex:1 1 auto;display:flex;min-height:0}
+.gal.cols .gcol > button:last-child img{height:100%;object-fit:cover;object-position:50% 35%}
 .gal button:hover img{transform:scale(1.04)}
 .lb{position:fixed;inset:0;z-index:70;background:rgba(40,14,24,.94);display:grid;grid-template-rows:auto 1fr auto;touch-action:pan-y}
 .lb[hidden]{display:none}
@@ -1482,6 +1488,31 @@ function petals(){
   $('#closeLetter').addEventListener('click', close);
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+})();
+
+/* ---------- gallery: two balanced columns that end on the same line ---------- */
+(() => {
+  const gal = $('#gal'); if (!gal) return;
+  const items = [...gal.querySelectorAll('button')].map(btn => { const im = btn.querySelector('img'); return { btn, r: (+im.getAttribute('height') || 1) / (+im.getAttribute('width') || 1) }; });
+  // greedy: each photo goes to the shorter column, keeping the original order
+  let A = [], B = [], ha = 0, hb = 0;
+  items.forEach(it => { if (ha <= hb) { A.push(it); ha += it.r; } else { B.push(it); hb += it.r; } });
+  // then swap pairs between the columns while it brings their heights closer
+  for (let pass = 0; pass < 6; pass++) {
+    let best = null, bestDiff = Math.abs(ha - hb);
+    for (let i = 0; i < A.length; i++) for (let j = 0; j < B.length; j++) {
+      const d = Math.abs((ha - A[i].r + B[j].r) - (hb - B[j].r + A[i].r));
+      if (d < bestDiff - 1e-6) { bestDiff = d; best = [i, j]; }
+    }
+    if (!best) break;
+    const [i, j] = best, t = A[i]; ha += B[j].r - t.r; hb += t.r - B[j].r; A[i] = B[j]; B[j] = t;
+  }
+  const order = new Map(items.map((it, k) => [it, k]));
+  [A, B].forEach(col => col.sort((x, y) => order.get(x) - order.get(y)));
+  // put the most landscape photo last in each column, so filling the gap crops it the least
+  [A, B].forEach(col => { let k = 0; col.forEach((it, n) => { if (it.r < col[k].r) k = n; }); col.push(col.splice(k, 1)[0]); });
+  const mk = list => { const c = document.createElement('div'); c.className = 'gcol'; list.forEach(it => c.appendChild(it.btn)); return c; };
+  gal.append(mk(A), mk(B)); gal.classList.add('cols');
 })();
 
 /* ---------- gallery lightbox ---------- */
