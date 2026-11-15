@@ -394,8 +394,8 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
       <div class="front"></div>
       <div class="flapw"><div class="flap"></div></div>
       <button class="wax" id="wax" type="button" aria-label="Open the envelope"></button>
-      <img class="flora" id="gateF1" src="photos/fl/corner-tl.webp" alt="" style="width:34%;left:-9%;bottom:-6%;transform:scaleY(-1)">
-      <img class="flora" id="gateF2" src="photos/fl/corner-tl2.webp" alt="" style="width:32%;right:-8%;top:-3%;transform:scaleX(-1)">
+      <img class="flora" id="gateF1" src="photos/fl/pink-corner.webp" alt="" style="width:44%;left:-11%;bottom:-8%;transform:scaleY(-1)">
+      <img class="flora" id="gateF2" src="photos/fl/corner-tl2.webp" alt="" style="width:40%;right:-9%;top:-4%;transform:scaleX(-1)">
     </div>
     <p class="gate-hint">Tap the seal to open</p>
   </div>
@@ -1419,12 +1419,14 @@ function paintTrim(w, h, fn, scale = 2){
 (() => {
   // [card, corner, image, width as fraction of card width, anchor x/y inside image (0-1, the point that sits on the card corner), inward offset x/y]
   const spots = [
-    ['#dateCard',  'tr', 'corner-tl2', .62, .82, .18, .06, .06],
-    ['#welcome',   'tr', 'posy',       .40, .30, .40, .00, .12],
-    ['#welcome',   'br', 'corner-br',  .58, .74, .74, -.02, .00],
-    ['#toRsvp',    'bl', 'spray3',     .62, .30, .70, .06, .04],
-    ['#toDetails', 'bl', 'corner-tl',  .64, .26, .64, .02, .06],
-    ['#letterBtn', 'tr', 'corner-tl2', .50, .82, .20, .06, .02],
+    ['#dateCard',  'tr', 'corner-tl2', .78, .82, .18, .06, .06],
+    ['#welcome',   'tr', 'posy',       .50, .30, .40, .00, .12],
+    ['#welcome',   'br', 'corner-br',  .72, .74, .74, -.02, .00],
+    ['#welcome',   'br', 'peony-pink', .26, .50, .50, .22, .02],
+    ['#toRsvp',    'bl', 'spray3',     .80, .30, .70, .06, .04],
+    ['#toDetails', 'bl', 'corner-tl',  .82, .26, .64, .02, .06],
+    ['#letterBtn', 'tr', 'corner-tl2', .64, .82, .20, .06, .02],
+    ['#letterBtn', 'tr', 'daisy',      .16, .50, .50, .32, .00],
   ];
   const items = spots.map(([sel, corner, name, size, axf, ayf, ix, iy]) => {
     const card = $(sel); if (!card) return null;
