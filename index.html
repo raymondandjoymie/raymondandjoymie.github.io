@@ -94,8 +94,8 @@ button{font:inherit;color:inherit}
 .gate-inner{position:absolute;inset:0;display:grid;place-content:end center;justify-items:center;text-align:center;padding:20px 20px max(7vh,28px)}
 .gate-to{font:600 clamp(11px,3vw,13px)/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--navy);min-height:1.4em;margin-bottom:4px;text-shadow:0 0 10px #fff,0 0 4px #fff}
 .gate-title{font:400 clamp(48px,14vw,92px)/1.15 var(--script);color:var(--navy);margin:0 0 18px;white-space:nowrap;text-shadow:0 2px 12px rgba(255,255,255,.9);
-  clip-path:inset(0 100% 0 0);animation:write 2.2s .4s cubic-bezier(.45,0,.35,1) forwards;padding:0 .15em}
-@keyframes write{to{clip-path:inset(0 -5% 0 -5%)}}
+  clip-path:inset(-60% 100% -60% -30%);animation:write 2.2s .4s cubic-bezier(.45,0,.35,1) forwards;padding:0 .3em}
+@keyframes write{to{clip-path:inset(-60% -30% -60% -30%)}}
 .env{--EW:min(330px,76vw);position:relative;width:var(--EW);height:calc(var(--EW)*.66);perspective:1200px;cursor:pointer}
 .env .back,.env .front,.env .flapw{position:absolute;inset:0}
 .env .back{z-index:1;background:linear-gradient(170deg,#f7b6c8,#f29ab5);border-radius:4px;box-shadow:0 24px 50px rgba(110,40,60,.35),0 4px 10px rgba(110,40,60,.2)}
