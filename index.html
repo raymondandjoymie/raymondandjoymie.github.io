@@ -394,8 +394,8 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
       <div class="front"></div>
       <div class="flapw"><div class="flap"></div></div>
       <button class="wax" id="wax" type="button" aria-label="Open the envelope"></button>
-      <img class="flora" id="gateF1" alt="" style="width:62%;left:-30%;bottom:-36%">
-      <img class="flora" id="gateF2" alt="" style="width:50%;right:-24%;top:-30%">
+      <img class="flora" id="gateF1" src="photos/fl/corner-tl.webp" alt="" style="width:34%;left:-9%;bottom:-6%;transform:scaleY(-1)">
+      <img class="flora" id="gateF2" src="photos/fl/corner-tl2.webp" alt="" style="width:32%;right:-8%;top:-3%;transform:scaleX(-1)">
     </div>
     <p class="gate-hint">Tap the seal to open</p>
   </div>
@@ -1396,8 +1396,6 @@ if (document.fonts) { document.fonts.ready.then(alignLetters); document.fonts.ad
 
 /* ---------- paint the scenes and florals ---------- */
 const jobs = [
-  ['#gateF1', 280, 280, c => Flora.bouquet(c, { seed: 4, x: 170, y: 120, s: .8, dir: -.9, spread: 2.6, cascade: 2, cascadeLen: .8, blue: 1, vivid: 1, roses: 3 })],
-  ['#gateF2', 260, 260, c => Flora.bouquet(c, { seed: 12, x: 100, y: 150, s: .75, dir: 2.3, spread: 2.4, cascade: 1, cascadeLen: .7, vivid: 1, roses: 3 })],
 ];
 function runJob([sel, w, h, fn]){
   if (sel.startsWith('#side') && innerWidth < 1000) return;
@@ -1444,7 +1442,8 @@ function paintTrim(w, h, fn, scale = 2){
       if (it.im.dataset.flip) { x.translate(c.width, 0); x.scale(-1, 1); }
       if (it.im.dataset.vflip) { x.translate(0, c.height); x.scale(1, -1); }
       x.drawImage(it.im, 0, 0); it.alpha = x.getImageData(0, 0, c.width, c.height).data; it.pw = c.width; it.ph = c.height; fit(); };
-    if (it.im.complete && it.im.naturalWidth) done(); else it.im.addEventListener('load', done, { once: true });
+    // wait a frame so the rest of this block (and the page) is ready before measuring
+    if (it.im.complete && it.im.naturalWidth) requestAnimationFrame(done); else it.im.addEventListener('load', done, { once: true });
   });
   const box = document.querySelector('.collage');
   // the words, record, monogram and photo that flowers must never cover
@@ -1499,8 +1498,7 @@ function paintTrim(w, h, fn, scale = 2){
   fit(); addEventListener('resize', fit); addEventListener('load', fit);
   if (document.fonts) document.fonts.ready.then(fit);
 })();
-runJob(jobs[0]); runJob(jobs[1]);
-let ji = 2; (function next(){ if (ji >= jobs.length) return; runJob(jobs[ji++]); setTimeout(next, 30); })();
+let ji = 0; (function next(){ if (ji >= jobs.length) return; runJob(jobs[ji++]); setTimeout(next, 30); })();
 
 /* ---------- music: a gentle generated waltz on a music box ---------- */
 const Synth = (() => {
