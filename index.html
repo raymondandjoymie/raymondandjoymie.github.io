@@ -89,15 +89,6 @@ button{font:inherit;color:inherit}
 #gate{position:fixed;inset:0;z-index:50;overflow:hidden;background:linear-gradient(180deg,#fde3e8,#fff6ec)}
 #gate[hidden]{display:none!important}
 #gate .veil{position:absolute;inset:0;background:radial-gradient(75% 50% at 50% 60%,rgba(255,255,255,.62),rgba(255,255,255,.12) 75%)}
-#gate .corner{position:absolute;z-index:1;pointer-events:none;height:auto;opacity:0;transition:opacity 1.2s ease .2s}
-#gate .corner.ready{opacity:1}
-#gate .corner.tl{left:0;top:0;width:clamp(170px,30vmax,380px)}
-#gate .corner.br{right:0;bottom:0;width:clamp(170px,30vmax,380px)}
-@media (max-aspect-ratio:1/1){
-  #gate .corner.tl{width:clamp(125px,46vw,260px);transform:translate(-12%,-26%)}
-  #gate .corner.br{width:clamp(150px,50vw,270px);transform:translate(12%,14%)}
-  #gate .gate-inner{padding-bottom:calc(40vw + 6px)}
-}
 #gate .bgfade{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 .gate-inner{position:absolute;inset:0;display:grid;place-content:end center;justify-items:center;text-align:center;padding:20px 20px max(7vh,28px)}
 .gate-to{font:600 clamp(11px,3vw,13px)/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--navy);min-height:1.4em;margin-bottom:4px;text-shadow:0 0 10px #fff,0 0 4px #fff}
@@ -129,6 +120,8 @@ button{font:inherit;color:inherit}
 .card{position:relative;display:block;text-decoration:none;color:var(--navy);border:0;padding:0;background:none;width:100%;text-align:center;cursor:default}
 a.card,button.card{cursor:pointer}
 
+/* peony clusters tucked into the collage card corners */
+.cflora{position:absolute;z-index:6;pointer-events:none;height:auto;filter:drop-shadow(0 3px 4px rgba(110,40,60,.18))}
 /* open envelope with rings */
 .env-open{aspect-ratio:1/1.02;margin-top:6px}
 .env-open .eflap{position:absolute;left:0;right:0;top:0;height:46%;background:linear-gradient(180deg,#ec86a6,#F48FB1);clip-path:polygon(0 100%,50% 0,100% 100%)}
@@ -390,8 +383,6 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
 <div id="gate" role="dialog" aria-label="Invitation envelope">
   <div class="photobg" aria-hidden="true"><img class="blur" src="photos/background-soft.jpg" alt=""><img class="sharp" src="photos/background.jpg" alt=""></div>
   <div class="veil"></div>
-  <img class="corner tl" id="cornerTL" alt="">
-  <img class="corner br" id="cornerBR" alt="">
   <div class="bgfade"></div>
   <div class="gate-inner">
     <div class="gate-to" id="gateTo"></div>
@@ -1425,16 +1416,27 @@ function paintTrim(w, h, fn, scale = 2){
   o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
   return { url: o.toDataURL('image/png'), w: o.width / scale, h: o.height / scale };
 }
+// peony clusters on the collage cards (like her printed invitation)
 (() => {
-  const tall = matchMedia('(max-aspect-ratio: 1/1)').matches;
-  const specs = [
-    ['#cornerTL', 460, 460, tall ? { seed: 5, x: 30, y: 30, s: 1.25, dir: .14, main: 'pink' } : { seed: 5, x: 40, y: 40, s: 1.45, dir: Math.PI / 4, main: 'pink' }],
-    ['#cornerBR', 460, 460, { seed: 9, x: 420, y: 420, s: 1.45, dir: -3 * Math.PI / 4, main: 'coral' }],
+  // [card, corner, width as % of card, offset x %, offset y %, painter options]
+  const spots = [
+    ['#dateCard', 'tr', 44, 26, -26, { seed: 5, x: 420, y: 40, s: 1.3, dir: 2.36, main: 'pink' }],
+    ['#welcome', 'tr', 42, 24, -20, { seed: 9, x: 420, y: 40, s: 1.3, dir: 2.36, main: 'coral' }],
+    ['#welcome', 'br', 38, 22, 30, { seed: 14, x: 420, y: 420, s: 1.2, dir: -2.36, main: 'pink' }],
+    ['#toRsvp', 'bl', 38, -24, 30, { seed: 21, x: 40, y: 420, s: 1.2, dir: -.79, main: 'coral' }],
+    ['#toDetails', 'bl', 50, -18, 14, { seed: 33, x: 40, y: 420, s: 1.25, dir: -.79, main: 'pink' }],
+    ['#letterBtn', 'tr', 44, 16, -26, { seed: 41, x: 420, y: 40, s: 1.2, dir: 2.36, main: 'coral' }],
   ];
-  specs.forEach(([sel, w, h, o]) => {
-    const el = $(sel), r = paintTrim(w, h, c => Flora.peonyCorner(c, o));
-    el.src = r.url; el.width = Math.round(r.w); el.height = Math.round(r.h);
-    requestAnimationFrame(() => el.classList.add('ready'));
+  spots.forEach(([sel, corner, w, ox, oy, o], k) => {
+    const card = $(sel); if (!card) return;
+    const r = paintTrim(460, 460, c => Flora.peonyCorner(c, o));
+    const im = document.createElement('img'); im.className = 'cflora'; im.alt = ''; im.setAttribute('aria-hidden', 'true');
+    im.src = r.url; im.width = Math.round(r.w); im.height = Math.round(r.h);
+    im.style.width = w + '%';
+    im.style[corner[0] === 't' ? 'top' : 'bottom'] = '0';
+    im.style[corner[1] === 'l' ? 'left' : 'right'] = '0';
+    im.style.transform = `translate(${ox}%, ${oy}%)`;
+    card.appendChild(im);
   });
 })();
 runJob(jobs[0]); runJob(jobs[1]);
