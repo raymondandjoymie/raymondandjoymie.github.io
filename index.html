@@ -233,7 +233,11 @@ h2.t{font:400 clamp(42px,12vw,56px)/1.1 var(--script);margin:0 0 6px;color:var(-
 /* entourage */
 .ent{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:8px 0 14px}
 .ent h4{font:400 21px/1.1 var(--script);margin:0 0 6px;font-weight:400}
-.ent ul{list-style:none;margin:0;padding:0;font:500 9px/1.8 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.ent ul{list-style:none;margin:0;padding:0;font:500 9.5px/1.55 var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.ent li{margin-bottom:4px;text-wrap:balance}
+.ent h4{white-space:nowrap}
+@media (max-width:370px){.ent h4{font-size:16.5px}.vframe{padding-left:40px;padding-right:40px}}
+.ent{align-items:start}
 h3.mid{font:400 26px/1.1 var(--script);margin:12px 0 6px;font-weight:400}
 
 /* dress code */
@@ -459,22 +463,32 @@ form.declining .if-yes{display:none}
       </ol>
     </section>
 
-    <!-- Entourage: hidden until the couple sends the real names -->
-    <section aria-labelledby="ent-h" hidden>
+    <section aria-labelledby="ent-h">
       <img class="orn" alt="">
       <h2 class="t" id="ent-h">The Entourage</h2>
+      <p class="sub">Santiago – Valencia</p>
+      <h3 class="mid">Parents</h3>
       <div class="ent">
-        <div><h4>Parents of the Groom</h4><ul><li>Mr. Daniel Reyes</li><li>Mrs. Teresa Reyes</li></ul></div>
-        <div><h4>Parents of the Bride</h4><ul><li>Mr. Chidi Okoye</li><li>Mrs. Ngozi Okoye</li></ul></div>
+        <div><h4>Bride</h4><ul><li>Mr. Ernesto Valencia</li><li>Mrs. Gorgonia Valencia</li></ul></div>
+        <div><h4>Groom</h4><ul><li>Mr. Renato Santiago</li><li>Mrs. Neolita Santiago</li></ul></div>
       </div>
       <h3 class="mid">Principal Sponsors</h3>
       <div class="ent">
-        <ul><li>Mr. Samuel Adeyemi</li><li>Mr. Lucas Moreno</li><li>Mr. Ifeanyi Obi</li><li>Mr. Peter Hale</li></ul>
-        <ul><li>Mrs. Funke Adeyemi</li><li>Mrs. Clara Moreno</li><li>Mrs. Ada Obi</li><li>Mrs. Grace Hale</li></ul>
+        <ul><li>Mr. Aniceto Lizardo Jr.</li><li>Bro. Benjamin Mondejar</li><li>Mr. Danny Mesa</li><li>Bro. Glenn Djen Gamboa</li><li>Mr. Orlando Tibayan</li></ul>
+        <ul><li>Mrs. Elsie Tibayan</li><li>Mrs. Evangeline Duquiatan</li><li>Mrs. Gina Guevarra</li><li>Mrs. Melinda Mauring</li><li>Mrs. Sara Carter</li></ul>
+      </div>
+      <h3 class="mid">Secondary Sponsors</h3>
+      <div class="ent">
+        <div><h4>Best Man</h4><ul><li>Raymart Santiago</li></ul></div>
+        <div><h4>Matron of Honor</h4><ul><li>Joyce Rosa</li></ul></div>
       </div>
       <div class="ent">
-        <div><h4>Best Man</h4><ul><li>Marco Reyes</li></ul></div>
-        <div><h4>Maid of Honor</h4><ul><li>Chioma Okoye</li></ul></div>
+        <div><h4>Groomsmen</h4><ul><li>Augustos Cionelo</li><li>John Harvey Sy</li><li>Mark Adriel Duquiatan</li><li>Raymart Arcy Glindo</li><li>Warren Macaburas</li></ul></div>
+        <div><h4>Bridesmaids</h4><ul><li>Aira Crystal Sy</li><li>Annabelle Seidel</li><li>Claudine Framilla</li><li>Czannel Tibayan</li><li>Laureen Jane Elardo</li></ul></div>
+      </div>
+      <div class="ent">
+        <div><h4>Ring Bearers</h4><ul><li>Joeven Noah Sugan</li><li>Sean Harry Noceda</li><li>Zmuel Angel Domingo Villacote</li></ul></div>
+        <div><h4>Flower Girls</h4><ul><li>Danaerys Valencia</li><li>Gieana Rayne Santiago</li><li>Luna Margareth Valencia</li></ul></div>
       </div>
     </section>
 
@@ -508,7 +522,7 @@ form.declining .if-yes{display:none}
       <h2 class="t" id="faq-h">FAQs</h2>
       <dl class="faq">
         <dt>Are plus-ones allowed?</dt><dd>We kindly request that this celebration be attended by invited guests only. Your invitation shows the seats reserved for you.</dd>
-        <dt>When is the RSVP deadline?</dt><dd>Please reply by <b>December 12, 2026</b>. You can send a new reply any time before then if your plans change.</dd>
+        <dt>When is the RSVP deadline?</dt><dd>Please reply by <b>November 30, 2026</b>. You can send a new reply any time before then if your plans change.</dd>
         <dt>Can I take photos?</dt><dd>Our ceremony is unplugged. Please keep phones away until the reception, then share freely with our hashtag.</dd>
       </dl>
     </section>
@@ -516,6 +530,7 @@ form.declining .if-yes{display:none}
     <section id="rsvp" aria-labelledby="rsvp-h">
       <img class="orn" alt="">
       <div class="rsvp-h" id="rsvp-h">RSVP HERE</div>
+      <p class="sub" style="margin:-6px 0 16px">Kindly reply by November 30, 2026</p>
       <div class="rcard">
         <h3>RSVP</h3>
         <form id="rsvpForm" novalidate>
