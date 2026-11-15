@@ -157,6 +157,7 @@ a.card,button.card{cursor:pointer}
 .date .dm{display:block;font:400 21cqi/1.15 var(--script);margin:1cqi 0 0 1cqi;white-space:nowrap}
 .date .dy{display:block;text-align:right;font:500 15cqi/1 var(--serif);margin:1cqi 2cqi 5cqi 0}
 .date .dl{display:block;font:400 11cqi/1.25 var(--script)}
+.date .venue-l{text-wrap:balance;line-height:1.2}
 .date .seat{display:block;margin-top:5cqi;font:600 5.4cqi/1.4 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--blue-d)}
 
 /* RSVP plaque (scalloped) */
@@ -428,7 +429,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
       <div class="col">
         <div class="card date" id="dateCard">
           <span class="dd">22</span><span class="dm">December</span><span class="dy">2026</span>
-          <span class="dl">At 3:00 P.M.</span><span class="dl">Iglesia ni Cristo</span>
+          <span class="dl">At 3:00 P.M.</span><span class="dl venue-l">Locale Congregation of Indang</span>
           <span class="seat" id="seatLine" hidden></span>
         </div>
         <a class="card plaque" href="#rsvp" id="toRsvp">
