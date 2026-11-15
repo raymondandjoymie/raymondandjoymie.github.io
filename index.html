@@ -129,7 +129,7 @@ a.card,button.card{cursor:pointer}
 .env-open .ecard .mono{width:54%;height:auto;filter:drop-shadow(0 1px 0 rgba(255,255,255,.8))}
 .env-open .epocket{position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(180deg,#f8b4c7,#f39ab5);clip-path:polygon(0 0,50% 42%,100% 0,100% 100%,0 100%);box-shadow:0 10px 20px rgba(110,40,60,.25)}
 .env-open .eback{position:absolute;left:0;right:0;bottom:0;height:62%;background:#e57d9d;box-shadow:0 12px 24px rgba(110,40,60,.28)}
-.vinyl{position:absolute;z-index:7;left:-16%;top:38%;width:62%;aspect-ratio:1;border:0;padding:0;background:none;cursor:pointer;border-radius:50%;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
+.vinyl{position:absolute;z-index:7;left:max(-16%,-12px);top:38%;width:62%;aspect-ratio:1;border:0;padding:0;background:none;cursor:pointer;border-radius:50%;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
 .vinyl svg{width:100%;height:100%;display:block}
 .vinyl .disc,.mini .disc{transform-origin:50% 50%}
 .vinyl.on .disc,.mini.on .disc{animation:spin 3.2s linear infinite}
@@ -1420,7 +1420,7 @@ function paintTrim(w, h, fn, scale = 2){
 (() => {
   // [card, corner, width as % of card, offset x %, offset y %, painter options]
   const spots = [
-    ['#dateCard', 'tr', 44, 26, -26, { seed: 5, x: 420, y: 40, s: 1.3, dir: 2.36, main: 'pink' }],
+    ['#dateCard', 'tr', 38, 24, -22, { seed: 5, x: 420, y: 40, s: 1.3, dir: 2.36, main: 'pink' }],
     ['#welcome', 'tr', 42, 24, -20, { seed: 9, x: 420, y: 40, s: 1.3, dir: 2.36, main: 'coral' }],
     ['#welcome', 'br', 38, 22, 30, { seed: 14, x: 420, y: 420, s: 1.2, dir: -2.36, main: 'pink' }],
     ['#toRsvp', 'bl', 38, -24, 30, { seed: 21, x: 40, y: 420, s: 1.2, dir: -.79, main: 'coral' }],
@@ -1438,6 +1438,22 @@ function paintTrim(w, h, fn, scale = 2){
     im.style.transform = `translate(${ox}%, ${oy}%)`;
     card.appendChild(im);
   });
+  // keep every cluster fully inside the collage so no petals get cut off at the screen edge
+  const box = document.querySelector('.collage');
+  function fit(){
+    const c = box.getBoundingClientRect(), vw = document.documentElement.clientWidth;
+    const L = Math.max(c.left, 0) + 3, R = Math.min(c.right, vw) - 3, T = c.top + 3;
+    document.querySelectorAll('.cflora').forEach(im => {
+      im.style.translate = '0 0';
+      const q = im.getBoundingClientRect();
+      let dx = 0, dy = 0;
+      if (q.left < L) dx = L - q.left; else if (q.right > R) dx = R - q.right;
+      if (q.top < T) dy = T - q.top;
+      im.style.translate = `${dx}px ${dy}px`;
+    });
+  }
+  fit(); addEventListener('resize', fit); addEventListener('load', fit);
+  if (document.fonts) document.fonts.ready.then(fit);
 })();
 runJob(jobs[0]); runJob(jobs[1]);
 let ji = 2; (function next(){ if (ji >= jobs.length) return; runJob(jobs[ji++]); setTimeout(next, 30); })();
