@@ -203,10 +203,19 @@ a.card,button.card{cursor:pointer}
 .calbtn{display:inline-block;margin-top:18px;font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--blue-d);border-radius:999px;padding:11px 18px}
 
 /* ---------- VINE-FRAMED PROGRAMME ---------- */
-.vframe{position:relative;padding:10px 46px 40px;background:#fffaf5}
-.vframe::before,.vframe::after{content:"";position:absolute;top:0;bottom:0;width:38px;background:var(--vine) 0 0/38px auto repeat-y;pointer-events:none;opacity:.95}
-.vframe::before{left:4px}
-.vframe::after{right:4px;transform:scaleX(-1)}
+/* the couple's watercolour border down both sides of the detail pages */
+.vframe{--bw:60px;position:relative;padding:14px 54px 40px;background:#fef8ed}
+.vframe > .bd{position:absolute;top:0;bottom:0;width:var(--bw);pointer-events:none;z-index:0}
+.vframe > .bd.l{left:0;-webkit-mask-image:linear-gradient(90deg,#000 72%,transparent);mask-image:linear-gradient(90deg,#000 72%,transparent)}
+.vframe > .bd.r{right:0;-webkit-mask-image:linear-gradient(270deg,#000 72%,transparent);mask-image:linear-gradient(270deg,#000 72%,transparent)}
+.vframe > .bd i{position:absolute;left:0;right:0;display:block;background-size:100% auto;background-repeat:no-repeat}
+.bd.l .t{top:0;height:calc(var(--bw) * 578 / 200);background-image:url(photos/border/l-top.jpg)}
+.bd.l .m{top:calc(var(--bw) * 578 / 200);bottom:calc(var(--bw) * 455 / 200);background:url(photos/border/l-mid.jpg) 0 0/100% auto round}
+.bd.l .b{bottom:0;height:calc(var(--bw) * 455 / 200);background-image:url(photos/border/l-bot.jpg)}
+.bd.r .t{top:0;height:calc(var(--bw) * 408 / 200);background-image:url(photos/border/r-top.jpg)}
+.bd.r .m{top:calc(var(--bw) * 408 / 200);bottom:calc(var(--bw) * 575 / 200);background:url(photos/border/r-mid.jpg) 0 0/100% auto round}
+.bd.r .b{bottom:0;height:calc(var(--bw) * 575 / 200);background-image:url(photos/border/r-bot.jpg)}
+.vframe > section{position:relative;z-index:1}
 .vframe section{padding:30px 0 10px;text-align:center}
 .orn{width:min(260px,88%);margin:0 auto 4px;height:auto}
 h2.t{font:400 clamp(42px,12vw,56px)/1.1 var(--script);margin:0 0 6px;color:var(--navy);font-weight:400}
@@ -233,10 +242,10 @@ h2.t{font:400 clamp(42px,12vw,56px)/1.1 var(--script);margin:0 0 6px;color:var(-
 .tl li:nth-child(3n+1)::before{left:50%}
 .tl li:nth-child(3n)::before{right:50%}
 .tl svg{width:36px;height:36px;stroke:var(--navy);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-.tl .dot{width:10px;height:10px;border-radius:50%;background:var(--navy);position:relative;z-index:1;box-shadow:0 0 0 4px #fffaf5}
+.tl .dot{width:10px;height:10px;border-radius:50%;background:var(--navy);position:relative;z-index:1;box-shadow:0 0 0 4px #fef8ed}
 .tl time{font:700 9.5px/1 var(--sans);letter-spacing:.08em}
 .tl b{font:500 9.5px/1.35 var(--sans);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-.tl li.now .dot{background:var(--blue-d);box-shadow:0 0 0 4px #fffaf5,0 0 0 7px rgba(233,30,99,.35)}
+.tl li.now .dot{background:var(--blue-d);box-shadow:0 0 0 4px #fef8ed,0 0 0 7px rgba(233,30,99,.35)}
 .tl li.now b::after{content:"Now";display:block;color:var(--blue-d)}
 
 /* entourage */
@@ -245,7 +254,7 @@ h2.t{font:400 clamp(42px,12vw,56px)/1.1 var(--script);margin:0 0 6px;color:var(-
 .ent ul{list-style:none;margin:0;padding:0;font:500 9.5px/1.55 var(--sans);letter-spacing:.06em;text-transform:uppercase}
 .ent li{margin-bottom:4px;text-wrap:balance}
 .ent h4{white-space:nowrap}
-@media (max-width:370px){.ent h4{font-size:16.5px}.vframe{padding-left:40px;padding-right:40px}}
+@media (max-width:370px){.ent h4{font-size:16.5px}.vframe{--bw:50px;padding-left:44px;padding-right:44px}}
 .ent{align-items:start}
 h3.mid{font:400 26px/1.1 var(--script);margin:12px 0 6px;font-weight:400}
 
@@ -462,6 +471,8 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
   </section>
 
   <div class="vframe">
+    <div class="bd l" aria-hidden="true"><i class="t"></i><i class="m"></i><i class="b"></i></div>
+    <div class="bd r" aria-hidden="true"><i class="t"></i><i class="m"></i><i class="b"></i></div>
     <section aria-labelledby="loc-h">
       <img class="orn" alt="">
       <h2 class="t" id="loc-h">Location Guide</h2>
@@ -1395,7 +1406,6 @@ if (document.fonts) { document.fonts.ready.then(alignLetters); document.fonts.ad
 const jobs = [
   ['#gateF1', 280, 280, c => Flora.bouquet(c, { seed: 4, x: 170, y: 120, s: .8, dir: -.9, spread: 2.6, cascade: 2, cascadeLen: .8, blue: 1, vivid: 1, roses: 3 })],
   ['#gateF2', 260, 260, c => Flora.bouquet(c, { seed: 12, x: 100, y: 150, s: .75, dir: 2.3, spread: 2.4, cascade: 1, cascadeLen: .7, vivid: 1, roses: 3 })],
-  ['vine', 38, 320, (c, w, h) => Flora.vine(c, w, h, 5)],
   ['orn', 320, 70, (c, w, h) => Flora.flourish(c, w, h, 8)],
 ];
 function runJob([sel, w, h, fn]){
