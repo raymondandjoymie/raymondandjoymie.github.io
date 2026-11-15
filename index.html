@@ -211,7 +211,7 @@ a.card,button.card{cursor:pointer}
 .bd.r .b{bottom:0;height:calc(var(--bw) * 575 / 200);background-image:url(photos/border/r-bot.jpg)}
 .vframe > section{position:relative;z-index:1}
 .vframe section{padding:30px 0 10px;text-align:center}
-.orn{width:min(260px,88%);margin:0 auto 4px;height:auto}
+.orn{display:block;width:min(230px,76%);margin:0 auto 2px;height:auto}
 h2.t{font:400 clamp(42px,12vw,56px)/1.1 var(--script);margin:0 0 6px;color:var(--navy);font-weight:400}
 .sub{font:italic 500 16px/1.3 var(--serif);color:var(--muted);margin:-4px 0 16px}
 .vframe p{margin:0 auto 12px;max-width:36ch}
@@ -428,7 +428,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
       <div class="col">
         <div class="card date" id="dateCard">
           <span class="dd">22</span><span class="dm">December</span><span class="dy">2026</span>
-          <span class="dl">At 3:00 P.M.</span><span class="dl">Iglesia ni Cristo</span><span class="dl">Indang</span>
+          <span class="dl">At 3:00 P.M.</span><span class="dl">Iglesia ni Cristo</span>
           <span class="seat" id="seatLine" hidden></span>
         </div>
         <a class="card plaque" href="#rsvp" id="toRsvp">
@@ -466,7 +466,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     <div class="bd l" aria-hidden="true"><i class="t"></i><i class="m"></i><i class="b"></i></div>
     <div class="bd r" aria-hidden="true"><i class="t"></i><i class="m"></i><i class="b"></i></div>
     <section aria-labelledby="loc-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray.webp" alt="" loading="lazy">
       <h2 class="t" id="loc-h">Location Guide</h2>
       <div class="loc">
         <div>
@@ -489,20 +489,20 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section aria-labelledby="tl-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray2.webp" alt="" loading="lazy">
       <h2 class="t" id="tl-h">Event Timeline</h2>
       <ol class="tl" id="tl">
         <li data-t="15:00"><svg viewBox="0 0 40 40"><circle cx="15" cy="24" r="9"/><circle cx="25" cy="24" r="9"/><path d="M22 13l3-5 3 5-3 2z"/></svg><span class="dot"></span><time>3:00 PM</time><b>Ceremony</b></li>
-        <li data-t="16:00"><svg viewBox="0 0 40 40"><rect x="5" y="12" width="30" height="20" rx="3"/><circle cx="20" cy="22" r="6"/><path d="M14 12l2-4h8l2 4"/></svg><span class="dot"></span><time>4:00 PM</time><b>Photos</b></li>
-        <li data-t="16:45"><svg viewBox="0 0 40 40"><path d="M9 6h8l-1 10a3 3 0 0 1-6 0zM13 19v13M9 32h8M23 6h8l-1 10a3 3 0 0 1-6 0zM27 19v13M23 32h8"/></svg><span class="dot"></span><time>4:45 PM</time><b>Cocktails</b></li>
-        <li data-t="17:30"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="10"/><circle cx="20" cy="20" r="6"/><path d="M5 8v8a2 2 0 0 0 2 2v14M5 8v6M8 8v6M35 8c-3 2-3 8 0 10v14"/></svg><span class="dot"></span><time>5:30 PM</time><b>Dinner</b></li>
-        <li data-t="19:00"><svg viewBox="0 0 40 40"><path d="M8 33h24M10 33V23h20v10M13 23v-7h14v7M16 16v-5h8v5M20 11V7"/></svg><span class="dot"></span><time>7:00 PM</time><b>Cake</b></li>
-        <li data-t="20:00" data-end="23:30"><svg viewBox="0 0 40 40"><path d="M15 30V10l16-4v20"/><circle cx="11" cy="30" r="4"/><circle cx="27" cy="26" r="4"/></svg><span class="dot"></span><time>8:00 PM</time><b>Party</b></li>
+        <li data-t="16:00"><svg viewBox="0 0 40 40"><rect x="5" y="12" width="30" height="20" rx="3"/><circle cx="20" cy="22" r="6"/><path d="M14 12l2-4h8l2 4M29 16h2"/></svg><span class="dot"></span><time>4:00 PM</time><b>Group Photo</b></li>
+        <li data-t="17:00"><svg viewBox="0 0 40 40"><path d="M5 18h18v6a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8zM23 20h2a3 3 0 0 1 0 6h-2M4 34h22M11 8c-1 2 1 3 0 5M15 8c-1 2 1 3 0 5"/><path d="M28 30c0-4 3-7 7-7-1 3 0 6 2 7-3 1-6 1-9 0z"/></svg><span class="dot"></span><time>5:00 PM</time><b>Pica-Pica</b></li>
+        <li data-t="18:00"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="10"/><circle cx="20" cy="20" r="6"/><path d="M5 8v8a2 2 0 0 0 2 2v14M5 8v6M8 8v6M35 8c-3 2-3 8 0 10v14"/></svg><span class="dot"></span><time>6:00 PM</time><b>Dinner</b></li>
+        <li data-t="19:00"><svg viewBox="0 0 40 40"><path d="M8 33h24M10 33V23h20v10M13 23v-7h14v7M16 16v-5h8v5M20 11V7"/><path d="M10 27c3 2 5-2 7 0s4-2 6 0 4 2 7 0"/></svg><span class="dot"></span><time>7:00 PM</time><b>Cake</b></li>
+        <li data-t="20:00" data-end="23:30"><svg viewBox="0 0 40 40"><path d="M6 26v-5l4-8h20l4 8v5zM6 26v4h5v-4M29 26v4h5v-4M10 13l-2 8h24l-2-8"/><circle cx="11" cy="22" r="1.5"/><circle cx="29" cy="22" r="1.5"/><path d="M20 25s-3-2-3-4a1.5 1.5 0 0 1 3-1 1.5 1.5 0 0 1 3 1c0 2-3 4-3 4z"/></svg><span class="dot"></span><time>8:00 PM</time><b>Sending Off</b></li>
       </ol>
     </section>
 
     <section aria-labelledby="ent-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray3.webp" alt="" loading="lazy">
       <h2 class="t" id="ent-h">The Entourage</h2>
       <p class="sub">Santiago – Valencia</p>
       <h3 class="mid">Parents</h3>
@@ -531,7 +531,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section aria-labelledby="dc-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray.webp" alt="" loading="lazy">
       <h2 class="t" id="dc-h">Dress Code</h2>
       <p class="sub">(Attire &amp; Colors)</p>
       <div class="attire-tabs" role="tablist" aria-label="Attire guide">
@@ -549,13 +549,13 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section aria-labelledby="gift-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray2.webp" alt="" loading="lazy">
       <h2 class="t" id="gift-h">Gift Guide</h2>
       <p>The most important thing to us is that you are able to celebrate with us on our wedding day. However, if you wish to give a gift, a monetary gift is simply a lovely bonus.</p>
     </section>
 
     <section aria-labelledby="rem-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray3.webp" alt="" loading="lazy">
       <h2 class="t" id="rem-h">Gentle Reminders</h2>
       <div class="rem">
         <span><svg viewBox="0 0 48 48"><circle cx="24" cy="26" r="15"/><path d="M24 17v9l6 4M18 6h12M24 6v5"/></svg>Be on time</span>
@@ -565,7 +565,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section aria-labelledby="faq-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray.webp" alt="" loading="lazy">
       <h2 class="t" id="faq-h">FAQs</h2>
       <dl class="faq">
         <dt>Are plus-ones allowed?</dt><dd>We kindly request that this celebration be attended by invited guests only. Your invitation shows the seats reserved for you.</dd>
@@ -575,7 +575,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section id="rsvp" aria-labelledby="rsvp-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray2.webp" alt="" loading="lazy">
       <div class="rsvp-h" id="rsvp-h">RSVP HERE</div>
       <p class="sub" style="margin:-6px 0 16px">Kindly reply by November 30, 2026</p>
       <div class="rcard">
@@ -613,7 +613,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section aria-labelledby="gal-h">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray3.webp" alt="" loading="lazy">
       <h2 class="t" id="gal-h">Our Gallery</h2>
       <p class="sub">Tap a photo to see it larger</p>
       <div class="gal" id="gal">
@@ -645,7 +645,7 @@ input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0
     </section>
 
     <section class="ty">
-      <img class="orn" alt="">
+      <img class="orn" src="photos/fl/spray.webp" alt="" loading="lazy">
       <h2>Thank you</h2>
       <p class="from">Raymond &amp; Joymie</p>
       <a class="top" href="#top" id="toTop">Back to top</a>
@@ -1398,7 +1398,6 @@ if (document.fonts) { document.fonts.ready.then(alignLetters); document.fonts.ad
 const jobs = [
   ['#gateF1', 280, 280, c => Flora.bouquet(c, { seed: 4, x: 170, y: 120, s: .8, dir: -.9, spread: 2.6, cascade: 2, cascadeLen: .8, blue: 1, vivid: 1, roses: 3 })],
   ['#gateF2', 260, 260, c => Flora.bouquet(c, { seed: 12, x: 100, y: 150, s: .75, dir: 2.3, spread: 2.4, cascade: 1, cascadeLen: .7, vivid: 1, roses: 3 })],
-  ['orn', 320, 70, (c, w, h) => Flora.flourish(c, w, h, 8)],
 ];
 function runJob([sel, w, h, fn]){
   if (sel.startsWith('#side') && innerWidth < 1000) return;
@@ -1418,27 +1417,35 @@ function paintTrim(w, h, fn, scale = 2){
   o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
   return { url: o.toDataURL('image/png'), w: o.width / scale, h: o.height / scale, ox: x0 / scale, oy: y0 / scale, alpha: o.getContext('2d').getImageData(0, 0, o.width, o.height).data, pw: o.width, ph: o.height };
 }
-// peony clusters on the collage cards (like her printed invitation)
+// her watercolour flower pieces on the collage cards
 (() => {
-  // [card, corner, size (cluster scale vs card width), inward offset x, inward offset y (fractions of card width), painter options]
-  // each cluster is painted whole on a large canvas around its centre point, so no petal is ever sliced off
+  // [card, corner, image, width as fraction of card width, anchor x/y inside image (0-1, the point that sits on the card corner), inward offset x/y]
   const spots = [
-    ['#dateCard',  'tr', .46, .12, .10, { seed: 5,  s: 1.3,  dir: 2.36, main: 'pink' }],
-    ['#welcome',   'tr', .46, .04, .14, { seed: 9,  s: 1.3,  dir: 2.36, main: 'coral' }],
-    ['#welcome',   'br', .44, -.02, .00, { seed: 14, s: 1.2,  dir: -2.36, main: 'pink' }],
-    ['#toRsvp',    'bl', .44, .08, .02, { seed: 21, s: 1.2,  dir: -.79, main: 'coral' }],
-    ['#toDetails', 'bl', .48, .04, .08, { seed: 33, s: 1.25, dir: -.79, main: 'pink' }],
-    ['#letterBtn', 'tr', .44, .08, .06, { seed: 41, s: 1.2,  dir: 2.36, main: 'coral' }],
+    ['#dateCard',  'tr', 'corner-tl2', .62, .82, .18, .06, .06],
+    ['#welcome',   'tr', 'posy',       .40, .30, .40, .00, .12],
+    ['#welcome',   'br', 'corner-br',  .58, .74, .74, -.02, .00],
+    ['#toRsvp',    'bl', 'spray3',     .62, .30, .70, .06, .04],
+    ['#toDetails', 'bl', 'corner-tl',  .64, .26, .64, .02, .06],
+    ['#letterBtn', 'tr', 'corner-tl2', .50, .82, .20, .06, .02],
   ];
-  const C = 900, A = 450;
-  const items = spots.map(([sel, corner, size, ix, iy, o]) => {
+  const items = spots.map(([sel, corner, name, size, axf, ayf, ix, iy]) => {
     const card = $(sel); if (!card) return null;
-    const r = paintTrim(C, C, c => Flora.peonyCorner(c, Object.assign({}, o, { x: A, y: A })));
-    const im = document.createElement('img'); im.className = 'cflora'; im.alt = ''; im.setAttribute('aria-hidden', 'true');
-    im.src = r.url; im.width = Math.round(r.w); im.height = Math.round(r.h); im.style.top = im.style.left = '0';
+    const im = document.createElement('img'); im.className = 'cflora'; im.alt = ''; im.setAttribute('aria-hidden', 'true'); im.decoding = 'async';
+    im.src = 'photos/fl/' + name + '.webp'; im.style.top = im.style.left = '0';
+    // mirror top-left pieces so they face the right corner
+    if (corner[1] === 'r' && /corner-tl/.test(name)) im.dataset.flip = '1';
+    if (corner === 'bl' && name === 'corner-tl') im.dataset.vflip = '1';
     card.appendChild(im);
-    return { im, card, corner, size, ix, iy, ax: A - r.ox, ay: A - r.oy, w: r.w, h: r.h, alpha: r.alpha, pw: r.pw, ph: r.ph };
+    return { im, card, corner, size, ix, iy, axf, ayf, alpha: null };
   }).filter(Boolean);
+  // read each image's transparency once it loads, so text checks use the real petals
+  items.forEach(it => {
+    const done = () => { const c = document.createElement('canvas'); c.width = it.im.naturalWidth; c.height = it.im.naturalHeight; const x = c.getContext('2d');
+      if (it.im.dataset.flip) { x.translate(c.width, 0); x.scale(-1, 1); }
+      if (it.im.dataset.vflip) { x.translate(0, c.height); x.scale(1, -1); }
+      x.drawImage(it.im, 0, 0); it.alpha = x.getImageData(0, 0, c.width, c.height).data; it.pw = c.width; it.ph = c.height; fit(); };
+    if (it.im.complete && it.im.naturalWidth) done(); else it.im.addEventListener('load', done, { once: true });
+  });
   const box = document.querySelector('.collage');
   // the words, record, monogram and photo that flowers must never cover
   function keepClear(){
@@ -1464,11 +1471,14 @@ function paintTrim(w, h, fn, scale = 2){
     return false;
   }
   function place(it, f, L, R, T){
-    const W = it.card.offsetWidth, H = it.card.offsetHeight, k = W * it.size * f / 260;
+    const W = it.card.offsetWidth, H = it.card.offsetHeight, iw = it.im.naturalWidth || 500, ih = it.im.naturalHeight || 400;
+    const w = W * it.size * f, h = w * ih / iw;
+    const ax = (it.im.dataset.flip ? 1 - it.axf : it.axf) * w, ay = (it.im.dataset.vflip ? 1 - it.ayf : it.ayf) * h;
     const cx = it.corner[1] === 'l' ? W * it.ix : W - W * it.ix;
     const cy = it.corner[0] === 't' ? W * it.iy : H - W * it.iy;
-    it.im.style.width = (it.w * k) + 'px'; it.im.style.height = (it.h * k) + 'px';
-    it.im.style.left = (cx - it.ax * k) + 'px'; it.im.style.top = (cy - it.ay * k) + 'px';
+    it.im.style.width = w + 'px'; it.im.style.height = h + 'px';
+    it.im.style.left = (cx - ax) + 'px'; it.im.style.top = (cy - ay) + 'px';
+    it.im.style.transform = `scale(${it.im.dataset.flip ? -1 : 1}, ${it.im.dataset.vflip ? -1 : 1})`;
     it.im.style.translate = '0 0';
     const q = it.im.getBoundingClientRect(); let dx = 0, dy = 0;
     if (q.left < L) dx = L - q.left; else if (q.right > R) dx = R - q.right;
@@ -1481,8 +1491,9 @@ function paintTrim(w, h, fn, scale = 2){
     const L = Math.max(c.left, 0) + 3, R = Math.min(c.right, vw) - 3, T = c.top + 3;
     const zones = keepClear();
     items.forEach(it => {
+      if (!it.alpha) return;
       let f = 1, q = place(it, f, L, R, T);
-      while (f > .45 && covers(it, q, zones)) { f -= .05; q = place(it, f, L, R, T); }
+      while (f > .4 && covers(it, q, zones)) { f -= .05; q = place(it, f, L, R, T); }
     });
   }
   fit(); addEventListener('resize', fit); addEventListener('load', fit);
