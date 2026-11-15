@@ -283,6 +283,18 @@ form.declining .if-yes{display:none}
 .go:hover{background:#c2185b}
 .ghost{display:block;width:100%;margin-top:8px;padding:12px;border-radius:8px;border:1.5px solid var(--blue-d);background:#fff;font:600 13px/1 var(--sans);cursor:pointer}
 .fine{font:400 10.5px/1.4 var(--sans);color:var(--muted);text-align:center;margin:8px 0 0}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+input[type=email]{width:100%;font:400 16px/1.4 var(--sans);color:var(--navy);background:#fff;border:1px solid #eab3c3;border-radius:6px;padding:10px 11px}
+input[type=email]:focus{outline:none;border-color:var(--blue-d);box-shadow:0 0 0 3px rgba(233,30,99,.2)}
+.calbox{display:grid;gap:8px;margin:4px 0 6px}
+.msgr-row[hidden]{display:none}
+.msgr-row{display:grid;justify-items:center;gap:8px;margin:16px 0 0;font:400 13px/1.3 var(--sans);color:var(--muted)}
+.msgr,.msgr-send{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:600 13px/1 var(--sans);color:#0A5CC2;background:#fff;border:1.5px solid #b9d6ff;border-radius:999px;padding:10px 16px}
+.msgr-send{display:flex;width:100%;margin-top:8px;border-radius:8px;padding:12px}
+.msgr .ms,.msgr-send .ms{width:18px;height:18px;flex:none}
+.calbox .ghost{text-align:center;text-decoration:none;color:var(--navy);margin:0}
+.go[disabled]{opacity:.65;cursor:progress}
+.err:empty{display:none}
 .thanks{display:none}
 .thanks.show{display:block;animation:fadein .5s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -546,17 +558,26 @@ form.declining .if-yes{display:none}
             <label><input type="radio" name="attend" id="att-no" value="no"><span>Can’t make it this time.</span></label>
           </fieldset>
           <div class="if-yes"><fieldset class="nums" id="nums"><legend class="q">How many will attend?</legend></fieldset></div>
+          <label for="r-email" id="emailRow"><span class="q">Your email (optional)</span><input type="email" id="r-email" autocomplete="email" inputmode="email" placeholder="We’ll send you a confirmation"></label>
           <label for="r-note"><span class="q">Message for the couple (optional)</span><textarea id="r-note"></textarea></label>
+          <label class="hp" aria-hidden="true">Leave this empty<input type="text" id="r-website" tabindex="-1" autocomplete="off"></label>
           <p class="err" id="err" role="alert"></p>
-          <button class="go" type="submit">RSVP now</button>
-          <p class="fine">Your reply is sent to Raymond &amp; Joymie on WhatsApp.</p>
+          <button class="go" type="submit" id="rsvpGo">RSVP now</button>
+          <p class="fine" id="rsvpFine">Your reply goes straight to Raymond &amp; Joymie.</p>
         </form>
+        <div class="msgr-row"><span>Prefer to message us?</span><a class="msgr" id="msgrLink" href="https://m.me/joymie.c.valencia"><svg viewBox="0 0 24 24" aria-hidden="true" class="ms"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.15.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.53-.04.91.25 1.88.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2z" fill="#0A7CFF"/><path d="M5.99 14.54l2.94-4.66c.47-.74 1.47-.93 2.17-.4l2.34 1.75c.21.16.51.16.72 0l3.16-2.4c.42-.32.97.18.69.63l-2.94 4.66c-.47.74-1.47.93-2.17.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63z" fill="#fff"/></svg>Message us on Messenger</a></div>
         <div class="thanks" id="thanks" aria-live="polite">
           <h3 id="thanksTitle">Thank you</h3>
-          <p>One last step: send your reply to us.</p>
-          <pre id="rsvpText"></pre>
-          <a class="go" id="waLink" href="#">Send on WhatsApp</a>
-          <button class="ghost" type="button" id="copyRsvp">Copy my reply</button>
+          <p id="thanksText">Your reply has been saved.</p>
+          <div id="waBox" hidden>
+            <pre id="rsvpText"></pre>
+            <button class="go" type="button" id="copyRsvp">1. Copy my reply</button>
+            <a class="ghost msgr-send" id="waLink" href="https://m.me/joymie.c.valencia"><svg viewBox="0 0 24 24" aria-hidden="true" class="ms"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.15.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.53-.04.91.25 1.88.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2z" fill="#0A7CFF"/><path d="M5.99 14.54l2.94-4.66c.47-.74 1.47-.93 2.17-.4l2.34 1.75c.21.16.51.16.72 0l3.16-2.4c.42-.32.97.18.69.63l-2.94 4.66c-.47.74-1.47.93-2.17.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63z" fill="#fff"/></svg>2. Open Messenger and paste it</a>
+          </div>
+          <div id="calBox" class="calbox" style="margin-top:14px">
+            <a class="go" id="calGoogle" href="#">Add to Google Calendar</a>
+            <a class="ghost" id="calIcs" href="#" download="Raymond-Joymie-Wedding.ics">Add to Apple / Outlook calendar</a>
+          </div>
           <button class="linkish" type="button" id="editRsvp">Change my reply</button>
         </div>
       </div>
@@ -1147,6 +1168,8 @@ const CONFIG = {
   start: "2026-12-22T15:00:00+08:00",
   end:   "2026-12-22T23:30:00+08:00",
   dayDate: "2026-12-22", tz: "+08:00",
+  rsvpEndpoint: "",  // the Google Apps Script web app link (ends in /exec); empty = WhatsApp replies
+  messenger: "joymie.c.valencia",
   whatsapp: "",   // couple's number, digits only with country code; empty opens the contact picker
   siteUrl: ""
 };
@@ -1574,36 +1597,85 @@ function petals(){
   update(); setInterval(update, 30000);
 })();
 
-/* ---------- RSVP ---------- */
+/* ---------- RSVP: saved to the couple's Google Sheet (falls back to WhatsApp if no sheet is connected) ---------- */
 (() => {
-  const form = $('#rsvpForm'), thanks = $('#thanks');
+  const form = $('#rsvpForm'), thanks = $('#thanks'), go = $('#rsvpGo');
   const max = guest?.seats || 4, def = guest?.seats || 1;
   $('#nums').insertAdjacentHTML('beforeend', Array.from({ length: max }, (_, i) => `<label><input type="radio" name="seats" id="seats-${i + 1}" value="${i + 1}"${i + 1 === def ? ' checked' : ''}><span>${i + 1}</span></label>`).join(''));
   const yes = () => form.querySelector('input[name=attend]:checked').value === 'yes';
   form.addEventListener('change', () => form.classList.toggle('declining', !yes()));
+  const useSheet = !!CONFIG.rsvpEndpoint;
+  const msgrRow = document.querySelector('.msgr-row');
+  if (!useSheet) msgrRow.hidden = true;
+  if (!useSheet) { $('#rsvpFine').textContent = 'You’ll send your reply to Joymie on Messenger in the next step.'; $('#emailRow').hidden = true; $('#rsvpGo').textContent = 'Next'; }
+
+  // calendar links
+  const fmt = iso => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const S = fmt(CONFIG.start), E = fmt(CONFIG.end);
+  const where = 'Iglesia Ni Cristo, Locale Congregation of Trece Martires City, Cavite';
+  const about = 'Ceremony 3:00 PM at ' + where + '. Reception at Fruella’s Events Venue Tagaytay, 144 Daang Luma, Amadeo, Cavite. https://raymondandjoymie.github.io';
+  $('#calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Raymond & Joymie’s Wedding') + '&dates=' + S + '/' + E + '&details=' + encodeURIComponent(about) + '&location=' + encodeURIComponent(where);
+  const esc = t => t.replace(/[,;\\]/g, m => '\\' + m);
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//RaymondJoymie//Invite//EN','BEGIN:VEVENT','UID:raymond-joymie-wedding-20261222@raymondandjoymie.github.io','DTSTAMP:' + fmt(new Date().toISOString()),'DTSTART:' + S,'DTEND:' + E,'SUMMARY:' + esc('Raymond & Joymie’s Wedding'),'LOCATION:' + esc(where),'DESCRIPTION:' + esc(about),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  $('#calIcs').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+
   let text = '';
-  form.addEventListener('submit', e => {
+  function showThanks(mode, name, attending, emailed){
+    const first = name.split(' ')[0];
+    $('#thanksTitle').textContent = attending ? `See you there, ${first}!` : `We’ll miss you, ${first}`;
+    $('#waBox').hidden = mode !== 'whatsapp';
+    $('#calBox').hidden = !attending;
+    $('#thanksText').textContent = mode === 'whatsapp' ? 'One last step: copy your reply, then send it to Joymie on Messenger.'
+      : attending ? (emailed ? 'Your RSVP is saved. We’ve emailed you a confirmation with all the details.' : 'Your RSVP is saved. Add the date to your calendar so you don’t miss it:')
+      : 'Thank you for letting us know. Your reply is saved.';
+    form.hidden = true; msgrRow.hidden = true; thanks.classList.add('show');
+    thanks.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (attending) petals();
+  }
+
+  async function send(payload){
+    const body = JSON.stringify(payload);
+    try {
+      const r = await fetch(CONFIG.rsvpEndpoint, { method: 'POST', body, redirect: 'follow' });
+      const j = await r.json().catch(() => ({ ok: r.ok }));
+      return !!j.ok;
+    } catch (err) {
+      // some in-app browsers block reading the reply; send once more without reading it
+      try { await fetch(CONFIG.rsvpEndpoint, { method: 'POST', body, mode: 'no-cors' }); return true; } catch (e2) { return false; }
+    }
+  }
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const name = $('#r-name').value.trim();
     if (!name) { $('#err').textContent = 'Please add your name so we know who is replying.'; $('#r-name').focus(); return; }
+    const email = $('#r-email').value.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('#err').textContent = 'That email doesn’t look right. Check it, or leave it empty.'; $('#r-email').focus(); return; }
     $('#err').textContent = '';
+    const attending = yes(), n = attending ? +form.querySelector('input[name=seats]:checked').value : 0, note = $('#r-note').value.trim();
+
     const lines = ['RSVP: Raymond & Joymie, 22 December 2026', `Name: ${name}`];
-    if (yes()) {
-      const n = +form.querySelector('input[name=seats]:checked').value;
-      lines.push(`Reply: Absolutely, wouldn't miss it! (${n} ${n === 1 ? 'guest' : 'guests'})`);
-    } else lines.push('Reply: Can’t make it this time');
-    if ($('#r-note').value.trim()) lines.push(`Message: ${$('#r-note').value.trim()}`);
+    lines.push(attending ? `Reply: Absolutely, wouldn't miss it! (${n} ${n === 1 ? 'guest' : 'guests'})` : 'Reply: Can’t make it this time');
+    if (note) lines.push(`Message: ${note}`);
     text = lines.join('\n');
     $('#rsvpText').textContent = text;
-    $('#thanksTitle').textContent = yes() ? `See you there, ${name.split(' ')[0]}` : `We’ll miss you, ${name.split(' ')[0]}`;
-    $('#waLink').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-    form.hidden = true; thanks.classList.add('show');
-    if (yes()) petals();
+    // Messenger can't pre-type a message, so guests copy their reply first and paste it
+
+    if (!useSheet) return showThanks('whatsapp', name, attending, false);
+
+    go.disabled = true; go.textContent = 'Sending…';
+    const rid = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    const ok = await send({ rid, name, attend: attending ? 'yes' : 'no', seats: n, email, note, website: $('#r-website').value, seatsReserved: guest?.seats || '' });
+    go.disabled = false; go.textContent = 'RSVP now';
+    if (ok) showThanks('sheet', name, attending, !!email);
+    else $('#err').textContent = 'We couldn’t send your reply. Check your internet connection and tap RSVP now again.';
   });
-  $('#editRsvp').addEventListener('click', () => { thanks.classList.remove('show'); form.hidden = false; $('#r-name').focus(); });
+  $('#editRsvp').addEventListener('click', () => { thanks.classList.remove('show'); form.hidden = false; msgrRow.hidden = !useSheet; $('#r-name').focus(); });
   $('#copyRsvp').addEventListener('click', async e => {
-    try { await navigator.clipboard.writeText(text); e.target.textContent = 'Copied'; } catch(err){ e.target.textContent = 'Select the text above to copy'; }
-    setTimeout(() => e.target.textContent = 'Copy my reply', 2200);
+    const btn = e.currentTarget;
+    try { await navigator.clipboard.writeText(text); btn.textContent = '✓ Copied. Now open Messenger'; }
+    catch(err){ const r = document.createRange(); r.selectNodeContents($('#rsvpText')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Text selected. Copy it, then open Messenger'; }
+    setTimeout(() => btn.textContent = '1. Copy my reply', 3500);
   });
 })();
 
